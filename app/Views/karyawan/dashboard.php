@@ -84,7 +84,7 @@
         <div class="text-3xl mb-4 bg-white/5 w-12 h-12 flex items-center justify-center rounded-2xl group-hover:bg-purple-500/20 transition">💵</div>
         <h4 class="text-lg font-bold mb-1">Slip Gaji Bulanan</h4>
         <p class="text-xs text-gray-400 mb-6 leading-relaxed">Akses berkas rincian gaji, tunjangan, dan potongan Anda secara transparan.</p>
-        <a href="#" class="inline-flex items-center text-xs font-bold text-purple-400 hover:text-purple-300 transition">
+        <a href="<?= base_url('/karyawan/slip-gaji') ?>" class="inline-flex items-center text-xs font-bold text-purple-400 hover:text-purple-300 transition">
           Buka Riwayat Gaji <span class="ml-1 group-hover:translate-x-1 transition transform">&rarr;</span>
         </a>
       </div>
@@ -94,7 +94,7 @@
         <div class="text-3xl mb-4 bg-white/5 w-12 h-12 flex items-center justify-center rounded-2xl group-hover:bg-indigo-500/20 transition">📅</div>
         <h4 class="text-lg font-bold mb-1">Permohonan Cuti</h4>
         <p class="text-xs text-gray-400 mb-6 leading-relaxed">Ajukan cuti tahunan, sakit, atau keperluan mendesak dengan approval otomatis.</p>
-        <a href="#" class="inline-flex items-center text-xs font-bold text-indigo-400 hover:text-indigo-300 transition">
+        <a href="<?= base_url('/karyawan/cuti') ?>" class="inline-flex items-center text-xs font-bold text-indigo-400 hover:text-indigo-300 transition">
           Form Pengajuan <span class="ml-1 group-hover:translate-x-1 transition transform">&rarr;</span>
         </a>
       </div>
@@ -104,7 +104,7 @@
         <div class="text-3xl mb-4 bg-white/5 w-12 h-12 flex items-center justify-center rounded-2xl group-hover:bg-emerald-500/20 transition">📄</div>
         <h4 class="text-lg font-bold mb-1">Unduh Dokumen Resmi</h4>
         <p class="text-xs text-gray-400 mb-6 leading-relaxed">Unduh Surat Keterangan Kerja, paklaring, atau berkas administrasi lainnya.</p>
-        <a href="#" class="inline-flex items-center text-xs font-bold text-emerald-400 hover:text-emerald-300 transition">
+        <a href="<?= base_url('/karyawan/download-surat') ?>" class="inline-flex items-center text-xs font-bold text-emerald-400 hover:text-emerald-300 transition">
           Lihat Berkas <span class="ml-1 group-hover:translate-x-1 transition transform">&rarr;</span>
         </a>
       </div>
