@@ -49,15 +49,23 @@
 
     <!-- WELCOME CARD / DATA PRIBADI (Fitur 3) -->
     <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-3xl mb-8 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-      <div class="w-20 h-20 bg-gradient-to-tr from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg shadow-purple-500/20">
-        👤
+      <div class="w-20 h-20 bg-gradient-to-tr from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/20 overflow-hidden border border-white/10">
+        <?php if (!empty($foto) && $foto !== 'default.png') : ?>
+          <!-- Menampilkan Foto Profil Hasil Upload -->
+          <img src="<?= base_url('uploads/profil/' . esc($foto)) ?>" alt="Foto Profil" class="w-full h-full object-cover">
+        <?php else : ?>
+          <!-- Menampilkan Inisial Nama atau Huruf Pertama Jika Masih Default -->
+          <span class="text-3xl font-bold text-white uppercase">
+            <?= substr(esc($nama), 0, 1) ?>
+          </span>
+        <?php endif; ?>
       </div>
       <div class="text-center sm:text-left flex-1">
         <h2 class="text-2xl font-extrabold tracking-tight">Selamat Datang, <?= esc($nama) ?>!</h2>
         <p class="text-gray-400 text-sm mt-1">NIP: <?= esc($nip) ?> • Jabatan: <span class="text-purple-400 font-medium"><?= esc($jabatan) ?></span></p>
       </div>
       <div>
-        <a href="#" class="bg-white/10 hover:bg-white/20 border border-white/10 px-5 py-2.5 rounded-xl text-xs font-medium transition duration-200 block text-center">
+        <a href="<?= base_url('/karyawan/profil') ?>" class="bg-white/10 hover:bg-white/20 border border-white/10 px-5 py-2.5 rounded-xl text-xs font-medium transition duration-200 block text-center">
           Lihat Profil Lengkap
         </a>
       </div>

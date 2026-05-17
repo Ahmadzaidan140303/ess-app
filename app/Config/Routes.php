@@ -28,3 +28,7 @@ $routes->get('/karyawan/slip-gaji', 'Karyawan::slip_gaji');
 // Rute khusus untuk Download Surat
 $routes->get('/karyawan/download-surat', 'Karyawan::download_surat');
 $routes->get('/karyawan/download-surat/proses/(:num)', 'Karyawan::proses_download/$1');
+
+// Rute khusus untuk Profil
+$routes->get('/karyawan/profil', 'Karyawan::profil');
+$routes->post('/karyawan/profil/upload', 'Karyawan::profil_upload_foto');

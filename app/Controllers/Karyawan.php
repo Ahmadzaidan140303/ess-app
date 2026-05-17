@@ -23,7 +23,7 @@ class Karyawan extends BaseController
             'nama'    => session()->get('nama_lengkap'),
             'jabatan' => session()->get('jabatan'),
             'nip'     => session()->get('nip'),
-            'foto'    => session()->get('foto'),
+            'foto'    => session()->get('foto') ? session()->get('foto') : 'default.png',
         ];
 
         return view('karyawan/dashboard', $data);
@@ -144,5 +144,81 @@ class Karyawan extends BaseController
         }
 
         return redirect()->back()->with('error', 'Dokumen tidak valid.');
+    }
+
+    public function profil()
+    {
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'karyawan') {
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $profilModel = new \App\Models\KaryawanProfilModel();
+        $userId = session()->get('user_id');
+
+        // Mengambil data profil berdasarkan user_id yang sedang login
+        $profilData = $profilModel->where('user_id', $userId)->first();
+
+        $data = [
+            'nama'    => session()->get('nama_lengkap'),
+            'jabatan' => session()->get('jabatan'),
+            'nip'     => session()->get('nip'),
+            'foto'    => $profilData ? $profilData['foto'] : 'default.png',
+            'profil'  => $profilData
+        ];
+
+        return view('karyawan/profil', $data);
+    }
+
+    public function profil_upload_foto()
+    {
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'karyawan') {
+            return redirect()->to('/login');
+        }
+
+        // 1. Validasi File (Harus gambar, maks 2MB)
+        if (!$this->validate([
+            'foto_profil' => [
+                'rules' => 'uploaded[foto_profil]|is_image[foto_profil]|mime_in[foto_profil,image/jpg,image/jpeg,image/png]|max_size[foto_profil,2048]',
+                'errors' => [
+                    'uploaded' => 'Silakan pilih file foto terlebih dahulu.',
+                    'is_image' => 'File yang Anda pilih bukan gambar.',
+                    'mime_in'  => 'Format gambar harus JPG, JPEG, atau PNG.',
+                    'max_size' => 'Ukuran gambar maksimal adalah 2 MB.'
+                ]
+            ]
+        ])) {
+            return redirect()->back()->with('error', $this->validator->getError('foto_profil'));
+        }
+
+        $profilModel = new \App\Models\KaryawanProfilModel();
+        $userId = session()->get('user_id');
+        $profil = $profilModel->where('user_id', $userId)->first();
+
+        // 2. Ambil file gambar yang diunggah
+        $fileFoto = $this->request->getFile('foto_profil');
+
+        // 3. Generate nama file acak agar tidak bentrok di server
+        $namaFotoBaru = $fileFoto->getRandomName();
+
+        // 4. Pindahkan file fisik ke folder public/uploads/profil/
+        $fileFoto->move(ROOTPATH . 'public/uploads/profil', $namaFotoBaru);
+
+        // 5. Hapus file foto fisik lama dari server (kecuali jika masih default.png)
+        if ($profil && $profil['foto'] !== 'default.png') {
+            $pathFotoLama = ROOTPATH . 'public/uploads/profil/' . $profil['foto'];
+            if (file_exists($pathFotoLama)) {
+                unlink($pathFotoLama);
+            }
+        }
+
+        // 6. Update nama file foto di Database
+        $profilModel->update($profil['id'], [
+            'foto' => $namaFotoBaru
+        ]);
+
+        // 7. Update data foto di Session agar foto di Navbar langsung berubah otomatis
+        session()->set('foto', $namaFotoBaru);
+
+        return redirect()->to('/karyawan/profil')->with('success', 'Foto profil Anda berhasil diperbarui!');
     }
 }
