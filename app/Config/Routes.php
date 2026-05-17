@@ -32,3 +32,11 @@ $routes->get('/karyawan/download-surat/proses/(:num)', 'Karyawan::proses_downloa
 // Rute khusus untuk Profil
 $routes->get('/karyawan/profil', 'Karyawan::profil');
 $routes->post('/karyawan/profil/upload', 'Karyawan::profil_upload_foto');
+
+// Rute khusus untuk Admin
+$routes->get('/admin/dashboard', 'Admin::index');
+
+// Rute khusus untuk Cuti Admin
+$routes->get('/admin/cuti', 'Admin::cuti_index');
+$routes->post('/admin/cuti/approve/(:num)', 'Admin::cuti_approve/$1');
+$routes->post('/admin/cuti/reject/(:num)', 'Admin::cuti_reject/$1');
