@@ -12,6 +12,7 @@ class KaryawanProfilModel extends Model
     protected $returnType       = 'array';
     protected $allowedFields    = [
         'user_id',
+        'nip',
         'nama_lengkap',
         'jabatan',
         'tempat_lahir',

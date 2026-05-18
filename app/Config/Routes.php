@@ -40,3 +40,13 @@ $routes->get('/admin/dashboard', 'Admin::index');
 $routes->get('/admin/cuti', 'Admin::cuti_index');
 $routes->post('/admin/cuti/approve/(:num)', 'Admin::cuti_approve/$1');
 $routes->post('/admin/cuti/reject/(:num)', 'Admin::cuti_reject/$1');
+
+// Rute khusus untuk Berkas Admin
+$routes->get('/admin/berkas', 'Admin::berkas_index');
+$routes->post('/admin/berkas/upload_slip', 'Admin::upload_slip');
+$routes->post('/admin/berkas/upload_dokumen', 'Admin::upload_dokumen');
+
+// Rute khusus untuk Karyawan Admin
+$routes->get('/admin/karyawan', 'Admin::karyawan_index');
+$routes->post('/admin/karyawan/store', 'Admin::karyawan_store');
+$routes->post('/admin/karyawan/update/(:num)', 'Admin::karyawan_update/$1');

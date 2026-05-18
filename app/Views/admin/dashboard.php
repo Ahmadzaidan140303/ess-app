@@ -88,7 +88,7 @@
           <h3 class="text-lg font-bold text-white">Master Data Karyawan</h3>
           <p class="text-xs text-gray-400 mt-1 leading-relaxed">Tambah karyawan baru, edit penempatan jabatan, ubah besaran gaji pokok, atau nonaktifkan akun.</p>
         </div>
-        <a href="#" class="mt-6 inline-flex items-center text-xs font-bold text-rose-400 hover:text-rose-300 transition">
+        <a href="<?= base_url('/admin/karyawan') ?>" class="mt-6 inline-flex items-center text-xs font-bold text-rose-400 hover:text-rose-300 transition">
           Buka Manajemen Karyawan <span class="ml-1 group-hover:translate-x-1 transition transform">&rarr;</span>
         </a>
       </div>
@@ -112,7 +112,7 @@
           <h3 class="text-lg font-bold text-white">Distribusi Slip & Dokumen</h3>
           <p class="text-xs text-gray-400 mt-1 leading-relaxed">Unggah berkas PDF slip gaji bulanan karyawan atau perbarui master template draf surat resmi perusahaan.</p>
         </div>
-        <a href="#" class="mt-6 inline-flex items-center text-xs font-bold text-indigo-400 hover:text-indigo-300 transition">
+        <a href="<?= base_url('/admin/berkas') ?>" class="mt-6 inline-flex items-center text-xs font-bold text-indigo-400 hover:text-indigo-300 transition">
           Kelola Distribusi Berkas <span class="ml-1 group-hover:translate-x-1 transition transform">&rarr;</span>
         </a>
       </div>
